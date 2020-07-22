@@ -108,7 +108,7 @@ function bubbleChart() {
     // @v4 Selections are immutable, so lets capture the
     //  enter selection to apply our transtition to below.
     var bubblesE = bubbles.enter().append('circle')      
-      .attr('class',  function (d){ return  ('bubble ' + d.year.toString()) +' '+ d.lab; })
+      .attr('class',  function (d){ return  ('bubble ' +'y'+d.year.toString()) +' '+ d.lab; })
       .attr('r', 0)
       .attr('fill', function (d) { return fillColor(d.type); })
       .attr('stroke', function (d) { return d3.rgb(fillColor(d.type)).darker(); })
