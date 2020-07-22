@@ -26,7 +26,13 @@ circle{
   text-align: center;
 }
 
+.bubbleDisabled:hover{
+  opacity: 0.07;
+}
 
+.bubbleDisabled{
+  opacity: 0.07;
+}
 
 
 
@@ -103,7 +109,7 @@ svg{
 }
 
 .filterTable{
-  width: 1200px;
+  width: 1600px; /*1200*/
   position: relative;
   left: 20px;
 }
@@ -120,10 +126,6 @@ svg{
 h2{
   position: relative;
   left: 150px;
-}
-
-#myInput{
-  width: 850px;
 }
 
 .container {
@@ -281,11 +283,15 @@ h2{
   bottom: 51px;
 }
 
+#myInput{
+  width: 650px;
+}
+
 /******************- Dropdown -*********************/
 
 .dropbtn {
   position: relative;
-  left: 50px;
+  left: 320px;
   background-color: #808080;
   color: white;
   padding: 16px;
@@ -296,6 +302,27 @@ h2{
   padding: 8px 8px;
   margin: 0px 0px;
   border: 0px 0px;
+}
+
+.dropbtn2 {
+  position: relative;
+  left: -36px;
+  background-color: #808080;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+
+  padding: 8px 8px;
+  margin: 0px 0px;
+  border: 0px 0px;
+}
+
+.dropbtnText{
+  position: relative;
+  left: 200px;
+
 }
 
 .dropbtn:hover, .dropbtn:focus {
@@ -323,7 +350,7 @@ h2{
 .dropdown-content {
   display: none;
   position: absolute;
-  left: 50px;
+  left: 320px;
   background-color: #f6f6f6;
   min-width: 230px;
   overflow: auto;
@@ -332,6 +359,24 @@ h2{
 }
 
 .dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content2 {
+  display: none;
+  position: absolute;
+  left: 962px;
+  background-color: #f6f6f6;
+  min-width: 230px;
+  overflow: auto;
+  border: 1px solid #ddd;
+  z-index: 1;
+}
+
+.dropdown-content2 a {
   color: black;
   padding: 12px 16px;
   text-decoration: none;

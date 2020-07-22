@@ -34,17 +34,32 @@ function getCursorXY(e) {
 //--- Mia proti prospatheia gia isagogh filtrwn ---//
 function applyFilters(){
   svg.selectAll(".bubble")
+        //.transition()
+        //.duration(1000)
+        //.attr('style', 'opacity: 100');
         .attr('style', 'visibility: visible'); 
   for(i=0; i<list1_of_disabled_bubbles.length; i++){
         svg.selectAll( list1_of_disabled_bubbles[i] )
+           //.transition()
+           //.duration(1000)
+           //.attr('style', 'opacity: 0.07');
            .attr('style', 'visibility: hidden');
-           //.attr('style', 'opacity: 0.07');     
+                
   }
   for(i=0; i<list2_of_disabled_bubbles.length; i++){
         svg.selectAll( list2_of_disabled_bubbles[i] )
-           .attr('style', 'visibility: hidden');
-           //.attr('style', 'opacity: 0.07');      
+            //.transition()
+            //.duration(1000)
+            //.attr('style', 'opacity: 0.07');
+            .attr('style', 'visibility: hidden');
+
   }
+  //#card reset
+
+  $("#cardtext").empty();
+  $("#cardtitle").empty();
+  $("#cardsubtitle").empty();
+
 }
 
 
@@ -83,11 +98,49 @@ function AuthorFunctionFilter(author_name){
 
 
 
+/* 
+ * Dimiourgia filtrarismatos tou Table pou einai sto telos tis optikopoiisis. 
+ */
+var names = [];
+var searchValue = " ";
+function typeFunctionFilter(type_name){
+  //input = document.getElementById("myInput2");
+  input = document.getElementById("myInput");
+  
+  input.value = type_name;
+
+  list1_of_disabled_bubbles = [];
+  searchValue = type_name.toLowerCase(); //Metatropi ths timis anazitisis se mikra gramata.
+
+  $("#myTableBody tr").filter(function() { //filtrarisma timwn pinaka simfona me mia sinartisi
+    $(this).toggle( ($(this).text().toLowerCase().indexOf(searchValue) > -1) && yearTableFilter($(this).text(),names) )  //gia kathe grami tou pinaka <tr> kanoume:
+                                           // toggle true(An h timi teriazei me to searchValue, indexOf epistrepsei thetiko arithmo) 
+                                          //h' toggle false(An h timi den teriazei me to searchValue, indexOf epistrepsei arnitiko arithmo).
+    var temp_id = parseInt($(this).text());
+    if( ($(this).text().toLowerCase().indexOf(searchValue) > -1 ) == false){
+      if(svg!=null){
+        list1_of_disabled_bubbles.push( "#id"+temp_id ); //apothikefse to id tou pediou pou egine aorato.
+      }
+    }   
+  });
+
+  applyFilters();
+
+}
+
+
+
+
+
 /* When the user clicks on the button,
  * toggle between hiding and showing the dropdown content 
  */
 function dropBtnShow() {
   document.getElementById("myDropdown").classList.toggle("show");
+}
+
+function dropBtnShow2() {
+  document.getElementById("myDropdown2").classList.toggle("show");
 }
 
 
@@ -303,7 +356,6 @@ function dataToCard(d) {  //#data
               '<a href="'+ d.link +'" target="_blank"> PDF </a>'+
               '</span>';
   }
-
 
 
   var tempDiv1 = document.createElement("div");

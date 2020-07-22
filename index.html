@@ -55,6 +55,10 @@
             <div class="noUi-touch-area" id="slider"></div>
           </div>
         </td>
+        <td>
+        </td>
+        <td>
+        </td>
       </tr>
       <tr>
         <td>
@@ -74,16 +78,42 @@
         <td>
         </td>
         <td>
-        </td>
-        <td>
           <div class="dropdown">
-            <button onclick="dropBtnShow()" class="dropbtn btn btn-primary">Επιλογή Συγγραφέα</button>
+            <button onclick="dropBtnShow()" class="dropbtn btn btn-primary">Επέλεξε Συγγραφέα</button>
             <div id="myDropdown" class="dropdown-content">
               <!--<input type="text" placeholder="Αναζήτηση Συγγραφέα..." id="myInput2" onkeyup="filterFunction()"> -->
-              <a onclick="AuthorFunctionFilter('Roussou')">Roussou Maria</a>
-              <a onclick="AuthorFunctionFilter('Gunopulos')">Gunopulos Dimitrios</a>
-              <a onclick="AuthorFunctionFilter('Delis')">Delis Alex</a>
-              <a onclick="AuthorFunctionFilter('Ioannidis')">Ioannidis Yannis</a>
+              <a onclick="AuthorFunctionFilter('')">- Όλοι οι Συγγραφείς -</a>
+              <a onclick="AuthorFunctionFilter('Gunopulos')">Dimitrios Gunopulos</a>
+              <a onclick="AuthorFunctionFilter('Maroulis')">Dimitris Maroulis</a>
+              <a onclick="AuthorFunctionFilter('Eleftheriadis')">Dr Alexandros Eleftheriadis</a>
+              <a onclick="AuthorFunctionFilter('Manolakos')">Elias S Manolakos</a>
+              <a onclick="AuthorFunctionFilter('Kouroupetroglou')">Georgios Kouroupetroglou</a>
+              <a onclick="AuthorFunctionFilter('Chamodrakas')">Ioannis Chamodrakas</a>
+              <a onclick="AuthorFunctionFilter('Emiris')">Ioannis Emiris</a>
+              <a onclick="AuthorFunctionFilter('Stavrakakis')">Ioannis Stavrakakis</a>
+              <a onclick="AuthorFunctionFilter('Merakos')">Lazaros Merakos</a>
+              <a onclick="AuthorFunctionFilter('Koubarakis')">Manolis Koubarakis</a>
+              <a onclick="AuthorFunctionFilter('Grigoriadou')">Maria Grigoriadou</a>
+              <a onclick="AuthorFunctionFilter('Roussou')">Maria Roussou</a>
+              <a onclick="AuthorFunctionFilter('Roussopoulos')">Mema Roussopoulos</a>
+              <a onclick="AuthorFunctionFilter('Mathiopoulos')">P Takis MathiopoulosP Takis Mathiopoulos</a>
+              <a onclick="AuthorFunctionFilter('Hadjiefthymiades')">Stathes Hadjiefthymiades</a>
+              <a onclick="AuthorFunctionFilter('Theoharis')">Theoharis Theoharis</a>
+              <a onclick="AuthorFunctionFilter('Ioannidis')">Yannis Ioannidis</a>
+            </div>
+          </div>
+          </td>
+          <td> 
+          <div class="dropdown2">
+            <button onclick="dropBtnShow2()" class="dropbtn2 btn btn-primary">Επέλεξε Είδος Δημοσίευσης</button>
+            <div id="myDropdown2" class="dropdown-content2">
+              <a onclick="typeFunctionFilter('')">- Όλα τα Ειδή Δημοσίευσης -</a>
+              <a onclick="typeFunctionFilter('Επιστημονικό Άρθρο')">Επιστημονικό Άρθρο</a>
+              <a onclick="typeFunctionFilter('Ευρεσιτεχνία')">Ευρεσιτεχνία</a>
+              <a onclick="typeFunctionFilter('Αναφορά')">Αναφορά</a>
+              <a onclick="typeFunctionFilter('Βιβλίο')">Βιβλίο</a>
+              <a onclick="typeFunctionFilter('Διάσκεψη')">Διάσκεψη</a>
+              <a onclick="typeFunctionFilter('Διάφορα')">Διάφορα</a>           
             </div>
           </div>
         </td>
