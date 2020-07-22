@@ -1,0 +1,371 @@
+circle{
+  cursor : pointer;
+}
+
+.labGrid, .rectBarsYear{
+  cursor : all-scroll;
+}
+
+
+#cardtext .name{
+  /*text-decoration: underline;*/
+  font-weight:bold;
+  font-size: 16px;
+}
+
+#cardtext .value{
+  font-size: 16px;
+}
+
+#cardtitle{
+  text-align: center;
+  font-size: 20px;
+}
+
+#cardsubtitle{
+  text-align: center;
+}
+
+
+
+
+
+body{
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+#mycard{
+    -webkit-touch-callout: text;
+    -webkit-user-select: text;
+    -khtml-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
+}
+
+#myTableBody{
+    -webkit-touch-callout: text;
+    -webkit-user-select: text;
+    -khtml-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
+}
+
+.filtertitle{
+  position: relative;
+  right: 20px;
+}
+
+#myTable tr td,#myTable tr th{
+
+  border-left-width: 1px;
+  border-left-style: solid;
+  border-top-width: 1px;
+  border-top-style: solid;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-right-width: 1px;
+  border-right-style: solid;
+}
+
+#detailedData{
+  position: absolute;
+  left: 1px;
+  padding-top: 0px;
+  padding-right: 0px;
+  padding-bottom: 0px;
+  padding-left: 0px;
+  margin-left: 1px;
+}
+
+.myContainer{
+  position: relative;
+  margin-bottom: 100px;
+}
+
+#pagetitle{
+ max-width: 2000px;
+ margin-left: 30px;
+}
+
+a, a:visited, a:active {
+  color: #444;
+}
+
+svg{
+  background: lightgray;
+}
+
+.filterTable{
+  width: 1200px;
+  position: relative;
+  left: 20px;
+}
+
+.filterTableTitle{
+  position: relative;
+  left: 20px;
+}
+
+.filterTable td{
+  height: 50px;
+}
+
+h2{
+  position: relative;
+  left: 150px;
+}
+
+#myInput{
+  width: 850px;
+}
+
+.container {
+  max-width: 1200px;
+  margin: auto;
+  position: absolute;
+  left: 0px;
+}
+
+.filterContainer{
+    position: relative;
+    width: 200px;
+    left: 50px;
+}
+
+.button {
+  min-width: 130px;
+  padding: 4px 5px;
+  cursor: pointer;
+  text-align: center;
+  font-size: 13px;
+  border: 1px solid #e0e0e0;
+  text-decoration: none;
+}
+
+.button.active {
+  background: #000;
+  color: #fff;
+}
+
+.card{
+  position: relative;
+  margin-left: 5px;
+  right: 400px;
+
+}
+
+#vis {
+  max-width: 1600px;   /*1300px*/
+  width: 75%;
+  /*height: 560px; /*560px*/
+  clear: both;
+  margin-bottom: 10px;
+  overflow: hidden;
+  /*overflow: scroll;*/
+ /* overflow-x: auto;*/
+ /* overflow-y: hidden;*/
+
+}
+
+#labsLabels div{
+  position: relative;
+  left: 0px;
+  top: 75px;
+  text-align: center;
+}
+
+#type_labels div{
+  position: relative;
+  left: 0px;
+  top: 85px;
+  text-align: center;
+  /*margin-bottom:  10px;*/
+}
+
+.visTable{
+  width: 100%;
+}
+
+#toolbar {
+  margin-top: 10px;
+}
+
+.year{
+  font-size: 15px;
+  color: #000000;   /*#808080*/
+  fill: #000000;   /*#808080*/
+  cursor: default;
+  background: lightgray;
+}
+
+.type{   
+  font-size: 15px;
+  color: #000000;   /*#808080*/
+  fill: #000000;   /*#808080*/
+  cursor: default;
+  background: lightgray;
+}
+
+.labs {
+  font-size: 10px;
+  color: #000000;
+  fill: #000000;
+  cursor: default;
+  background: lightgray;
+}
+
+.tooltip {
+	position: absolute;
+	top: 100px;
+	left: 100px;
+  -moz-border-radius:5px;
+	border-radius: 5px;
+  border: 2px solid #000;
+  background: #fff;
+	opacity: .9;
+  color: black;
+	padding: 10px;
+	width: 300px;
+	font-size: 12px;
+	z-index: 10;
+}
+
+.tooltip > .title {
+	font-size: 15px;
+  text-align: center;
+  font-weight:bold;
+  margin-bottom:5px;
+}
+
+.tooltip .subtitle {
+  font-size: 10px;
+}
+
+.tooltip .name {
+  font-weight:bold;
+}
+
+.tooltip .value {
+  /*font-size: 10px;*/
+}
+
+.footer {
+  text-align: center;
+}
+
+#input-select,#input-select2{
+  padding: 4px;
+  margin: 15px 5px 5px;
+  width: 70px;
+  position: relative;
+  bottom: 57px;
+  left: 40px;
+}
+
+#filterContainer2{
+    border-top-width: 0px;
+    border-left-width: 0px;
+    border-bottom-width: 0px;
+    border-right-width: 0px;
+}
+
+#filterContainer2 .noUi-base{
+  position: relative;
+  bottom: 51px;
+}
+
+/******************- Dropdown -*********************/
+
+.dropbtn {
+  position: relative;
+  left: 50px;
+  background-color: #808080;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+
+  padding: 8px 8px;
+  margin: 0px 0px;
+  border: 0px 0px;
+}
+
+.dropbtn:hover, .dropbtn:focus {
+  background-color: #606060;
+}
+
+#myInput2 {
+  box-sizing: border-box;
+  background-image: url('searchicon.png');
+  background-position: 14px 12px;
+  background-repeat: no-repeat;
+  font-size: 16px;
+  padding: 14px 20px 12px 45px;
+  border: none;
+  border-bottom: 1px solid #ddd;
+}
+
+#myInput2:focus {outline: 3px solid #ddd;}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  left: 50px;
+  background-color: #f6f6f6;
+  min-width: 230px;
+  overflow: auto;
+  border: 1px solid #ddd;
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+
+
+
+.dropdown a:hover {background-color: #CCE5FF;}
+
+.show {
+  display: block;
+}
+
+
+
+.rectBarsYear {
+    fill: lightgray;
+    /*pointer-events: all;*/
+}
+
+
+/*
+.rectBarsYear:hover { 
+    fill: #808080;
+}
+*/
+
+
+/*
+.year {fill: yellow;}
+*/
+/*
+.rectBarsYear:hover ~ .year {
+    fill: white; 
+}*/

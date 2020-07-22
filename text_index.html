@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<head>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <style>
+
+    body {
+      font: 20px sans-serif;
+      background: white;
+    }
+
+    svg { background: lightgrey; }
+
+    .ribbons {
+      fill-opacity: 0.67;
+    }
+
+    </style>
+
+</head>
+
+<body>
+    
+
+
+    <svg id="svgid" width="1000" height="500"></svg>
+
+    <script>
+        //Create the SVG
+        var svg = d3.select("#svgid");
+
+
+        var str = "Yay, my text is on a wavy path";
+        var len = str.length*10;
+        console.log("M 10,90 l" + len.toString() + ",0");
+
+        //Create an SVG path (based on bl.ocks.org/mbostock/2565344)
+        svg.append("path")
+            .attr("id", "wavy") //Unique id of the path
+            //.attr("d", "M 10,90 Q 100,15 200,70 Q 340,140 400,30") //SVG path
+            .attr("d", "M75,300 l" + len.toString() + ",0") //SVG path
+            .style("fill", "none")
+            .style("stroke", "#AAAAAA");
+
+        //Create an SVG text element and append a textPath element
+        svg.append("text")
+           .append("textPath") //append a textPath to the text element
+            .attr("xlink:href", "#wavy") //place the ID of the path here
+            .style("text-anchor","middle") //place the text halfway on the arc
+            .attr("startOffset", "50%")
+            .text("Yay, my text is on a wavy path");
+
+
+        //Transition from the original arc path to a new arc path
+        svg.selectAll("path")
+            .transition().duration(2000).delay(1000)
+            .attr("d", "M75,300 A125,125 0 0,1 325,300");
+
+    </script>
+</body>

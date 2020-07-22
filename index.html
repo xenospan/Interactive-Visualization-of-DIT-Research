@@ -1,60 +1,166 @@
-<!DOCTYPE html>
-<meta charset="utf-8">
+<!doctype html>
+<html>
 <head>
-    <script src="https://d3js.org/d3.v4.min.js"></script>
-    <style>
+  <meta charset="utf-8">
 
-    body {
-      font: 20px sans-serif;
-      background: white;
-    }
+  <title>Διαδραστική Οπτικοποίηση Ερευνητικών Δημοσιεύσεων του Τμήματος Πληροφορικής και Τηλεπικοινωνιών του ΕΚΠΑ</title>
 
-    svg { background: lightgrey; }
+  <meta name="description" content="Using D3v4 to create a Bubble chart. Based on NYT visualization">
+  <meta name="author" content="Jim Vallandingham">
 
-    .ribbons {
-      fill-opacity: 0.67;
-    }
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/index.css">
+  <link rel="stylesheet" type="text/css" href="scc/style.css">
 
-    </style>
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+  <script src="https://d3js.org/d3-dsv.v1.min.js"></script>
+  <script
+        src="https://code.jquery.com/jquery-3.4.1.js"
+        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+        crossorigin="anonymous">      
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.0.3/nouislider.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.0.3/nouislider.min.css" />
 
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/wnumb@1.2.0/wNumb.min.js" integrity="sha256-DkHIFUKQfqQ7jA6GnWR9ZyB4Jb+j+dOuY12vnYq8xjk=" crossorigin="anonymous">
+  </script>
 </head>
 
+
 <body>
+
+  <h4 id="pagetitle">Διαδραστική Οπτικοποίηση Ερευνητικών Δημοσιεύσεων του Τμήματος Πληροφορικής και Τηλεπικοινωνιών του ΕΚΠΑ</h4>
+  <div class="container">
+  <br><br>
+    <table class="filterTable">
+      <tr>
+        <td>
+          <div class="filtertitle"></div>
+        </td>
+        <td>
+          <div id="filterContainer2">
+            <select id="input-select" ></select>
+            <select id="input-select2" ></select>
+          </div>
+        </td>
+        <td>
+          <div class="filterContainer" id="sliderCon">
+            <div class="noUi-touch-area" id="slider"></div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+
+<!--
+  <div class="input-group">
+  <span class="input-group-addon glyphicon glyphicon-search"></span>
+  <input type="text" class="form-control">
+  <span class="input-group-addon glyphicon glyphicon-remove-circle"></span>
+</div>
+
+ -->
+        <div class="container">
+          <input class="form-control" id="myInput" type="text" placeholder="Αναζήτηση Λέξης-Κλειδί/ Μέρος Τίτλου/ Συγγραφέα/ Είδος Δημοσίευσης...">
+        </div>
+        </td>
+        <td>
+        </td>
+        <td>
+        </td>
+        <td>
+          <div class="dropdown">
+            <button onclick="dropBtnShow()" class="dropbtn btn btn-primary">Επιλογή Συγγραφέα</button>
+            <div id="myDropdown" class="dropdown-content">
+              <!--<input type="text" placeholder="Αναζήτηση Συγγραφέα..." id="myInput2" onkeyup="filterFunction()"> -->
+              <a onclick="AuthorFunctionFilter('Roussou')">Roussou Maria</a>
+              <a onclick="AuthorFunctionFilter('Gunopulos')">Gunopulos Dimitrios</a>
+              <a onclick="AuthorFunctionFilter('Delis')">Delis Alex</a>
+              <a onclick="AuthorFunctionFilter('Ioannidis')">Ioannidis Yannis</a>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </table>
+
+    <div id="toolbar">
+      <a href="#" id="all" class="button">Όλες οι Δημοσιεύσεις Συνολικά</a>
+      <a href="#" id="type_year" class="button">Δημοσιεύσεις ανά Είδος και Έτος</a>
+      <a href="#" id="lab_year" class="button active">Δημοσιεύσεις ανά Όνομα Ερευνητικού Εργαστηρίου και Έτος</a>
+    </div>
+
+    <table class="visTable">
+      <tr>
+        <td>
+
+          <div id="type_labels" class="type"></div>
+          <div id="labs_labels" class="labs"></div>
+
+        </td>
+        <td>
+
+          <div id="vis"></div> 
+
+        </td>
+        <td>
+
+            <div class="card" id="mycard" style="width: 18rem;">
+              <div class="card-body">
+                <h5 class="card-title" id="cardtitle"></h5>
+                <h6 class="card-subtitle mb-2 text-muted" id="cardsubtitle"></h6>
+                <p class="card-text" id="cardtext"></p>
+                <a href="#" class="card-link"></a>
+              </div>
+            </div>
+
+        </td>
+      </tr>
+      <tr>
+        <td>
+        </td>
+        <td>
+          <br>
+
+            <button id="but1" class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                    -Πίνακας Δεδομένων-
+            </button>
+            </p>
+            <div class="collapse" id="collapseExample">
+              <div class="card card-body" id="detailedData">
+                
+                    <div class="myContainer" id="myContainer"></div>
+
+              </div>
+            </div>
+
+
+        </td>
+      </tr>
+
+    </table>
     
+  </div>
 
 
-    <svg id="svgid" width="1000" height="500"></svg>
 
-    <script>
-        //Create the SVG
-        var svg = d3.select("#svgid");
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br>
 
-
-        var str = "Yay, my text is on a wavy path";
-        var len = str.length*10;
-        console.log("M 10,90 l" + len.toString() + ",0");
-
-        //Create an SVG path (based on bl.ocks.org/mbostock/2565344)
-        svg.append("path")
-            .attr("id", "wavy") //Unique id of the path
-            //.attr("d", "M 10,90 Q 100,15 200,70 Q 340,140 400,30") //SVG path
-            .attr("d", "M75,300 l" + len.toString() + ",0") //SVG path
-            .style("fill", "none")
-            .style("stroke", "#AAAAAA");
-
-        //Create an SVG text element and append a textPath element
-        svg.append("text")
-           .append("textPath") //append a textPath to the text element
-            .attr("xlink:href", "#wavy") //place the ID of the path here
-            .style("text-anchor","middle") //place the text halfway on the arc
-            .attr("startOffset", "50%")
-            .text("Yay, my text is on a wavy path");
+ 
 
 
-        //Transition from the original arc path to a new arc path
-        svg.selectAll("path")
-            .transition().duration(2000).delay(1000)
-            .attr("d", "M75,300 A125,125 0 0,1 325,300");
 
-    </script>
+  <script src="src/tooltip.js"></script>
+  <script src="src/bubbleFun.js"></script>
+  <script src="src/fun.js"></script>
+  <script src="src/index.js"></script>
+
 </body>
+</html>
