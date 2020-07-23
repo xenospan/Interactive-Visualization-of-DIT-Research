@@ -356,6 +356,8 @@ h2{
   overflow: auto;
   border: 1px solid #ddd;
   z-index: 1;
+  overflow-y: scroll;
+  height: 500px;
 }
 
 .dropdown-content a {
@@ -374,6 +376,7 @@ h2{
   overflow: auto;
   border: 1px solid #ddd;
   z-index: 1;
+  /*overflow-y: scroll;*/
 }
 
 .dropdown-content2 a {
@@ -398,6 +401,26 @@ h2{
     fill: lightgray;
     /*pointer-events: all;*/
 }
+
+.imageClass{
+  position: absolute;
+  top: 954px;
+  left: 427px;
+}
+
+.collapse{
+  position: relative;
+  top: 100px;
+  left: 0px;
+}
+
+#but1{
+
+  position: relative;
+  top: 100px;
+
+}
+
 
 
 /*

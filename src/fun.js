@@ -57,6 +57,7 @@ function applyFilters(){
   //#card reset
 
   $("#cardtext").empty();
+  $("#cardtext").innerText = "lalal";
   $("#cardtitle").empty();
   $("#cardsubtitle").empty();
 
