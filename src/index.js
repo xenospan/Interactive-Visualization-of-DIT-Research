@@ -72,9 +72,18 @@ function bubbleChart() {
       .attr('id','svgid');
 
     /* Make it Zoom */
-    svg.call(d3.zoom().on('zoom',() => {
-      zoomedLabs();
-    }));
+    svg.call(
+      d3.zoom() 
+      .scaleExtent([0.6070974421975235, 2.7132086548953436])
+      .translateExtent([[-6772, 0], [width+4500, height]])
+      .on('zoom',() => {
+          zoomedLabs();
+        })
+        /*.filter(function () {
+          console.log("ekteloume",d3.event.mousedown);
+          return d3.event.ctrlKey;
+        })*/ //#ctrl
+    );
 
     g_yearLabels = d3.select('svg').append('g')
       .attr('id', "yearLabels")
@@ -124,11 +133,11 @@ function bubbleChart() {
        /// .on('dblclick', bubbleDblclick)   ///
       /// .classed('bubble', true)          ///
 
-
+      /*
       svg.on("click", function() {
         var coords = d3.mouse(this);
-        console.log(coords)
-      });
+        //console.log(coords)
+      });*/
       
 
     // @v4 Merge the original empty selection and the enter selection
@@ -177,38 +186,53 @@ function bubbleChart() {
       grid.attr('transform', t);
       labsLabels.attr('transform', t);
 
-      /* Make it Zoom */
-      svg.call(
-        d3.zoom()
-        .on('zoom',()=>{zoomedAll();} )
-      );
+    /* Make it Zoom */
+    svg.call(
+      d3.zoom() 
+      .scaleExtent([1, 2.7132086548953436])
+      .translateExtent([[0, 0], [width, height]])
+      .on('zoom',() => {
+          zoomedAll();
+        })
+        /*.filter(function () {
+          console.log("ekteloume",d3.event.mousedown);
+          return d3.event.ctrlKey;
+        })*/ //#ctrl
+    );
 
     }else if(displayName === 'lab_year'){
       splitBubblesToLabs();
       
-/*
-      g_vis.attr('transform', 'translate(-6805 0)');
-      g_yearLabels.attr('transform', 'translate(-6805 0)');
-      grid.attr('transform', 'translate(-6805 0)');
-      labsLabels.attr('transform', 'translate(-6805 0)');
-*/
       /* Make it Zoom */
-      svg.call(d3.zoom().on('zoom',() => {
-        zoomedLabs();
-      }));
+      svg.call(
+        d3.zoom() 
+        .scaleExtent([0.6070974421975235, 2.7132086548953436])
+        .translateExtent([[-6772, 0], [width+4500, height]])
+        .on('zoom',() => {
+            zoomedLabs();
+          })
+          /*.filter(function () {
+            console.log("ekteloume",d3.event.mousedown);
+            return d3.event.ctrlKey;
+          })*/ //#ctrl
+      );
+
 		}else if(displayName === 'type_year'){
 			splitBubbles();
-/*
-      var t = {k:1,x:-6805,y:1};
-      g_vis.attr('transform', t);
-      g_yearLabels.attr('transform', t);
-      grid.attr('transform', t);
-      labsLabels.attr('transform', t);
-*/
+
       /* Make it Zoom */
-      svg.call(d3.zoom().on('zoom',() => {
-        zoomedTypes();
-      }));
+      svg.call(
+        d3.zoom() 
+        .scaleExtent([0.6070974421975235, 2.7132086548953436])
+        .translateExtent([[-6772, 0], [width+4500, height]])
+        .on('zoom',() => {
+            zoomedTypes();
+          })
+          /*.filter(function () {
+            console.log("ekteloume",d3.event.mousedown);
+            return d3.event.ctrlKey;
+          })*/ //#ctrl
+      );
     }
 	};
 

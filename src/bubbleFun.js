@@ -2,6 +2,7 @@
  * Afto to arxeio filoksenei sinartiseis sxetikes me to bubble vis.
  *
  */
+var zoomFlag = 1 ;
 var rootOffcetX = 6750;
 var rootOffcetY = 0;
 
@@ -166,7 +167,7 @@ function filterNodes(rawData){
 			var labsList = d.labLink.split(",");
 			tempLab = urlToLabs(labsList[0]);  //pernei to proto ergastirio pou yparxei stin lista twn data sto pedio labLink.
 			tempLabLink = labsList[0];
-			console.log(tempLabLink)
+			//console.log(tempLabLink)
 		}
 
 		if(d.year>=start_year && d.year<=end_year)
@@ -506,6 +507,7 @@ function zoomedLabs(){
 	typeLabels.attr('transform', t);
 }
 
+
 //http://bl.ocks.org/WilliamQLiu/76ae20060e19bf42d774
 // https://bl.ocks.org/mbostock/5e81cc677d186b6845cb00676758a339
 //Periorismos tou zoom... $$$$
@@ -518,25 +520,16 @@ function zoomedLabs(){
 //t.invertY(height)+t.y == 700
 function zoomPosFixed(t){
 
-	if (t.k>1.5){
-
+	if (t.x<-70 && t.k==1){
+		t.x = -70;
 	}
-	else{
-		if (t.y<1) t.y = 1;
-		else if (t.y>1) t.y = 1;
+	else if(t.k>1 && t.k <= 1.6471820345351462 && t.x<-877.5684473379315){
+		t.x=-877.5684473379315;
 	}
-	if (t.k < 0.5) t.k = 0.5;
+	else if(t.k <= 2.7132086548953436 && t.x<-2214.3504808609173){
+		t.x=-2214.3504808609173;
+	}
 
-	//if (t.k > 3) t.k = 3;
-	
-
-	//if (t.x > 7) t.x = 7;
-	//else if (t.x/t.k < -6810) t.x = -6810*t.k;
-
-	//if (t.y > -30) t.y = -30;
-	//else if (t.y < 0.5) t.y = 0.5;
-
-	//console.log("t.x/t.k:"+t.x/(t.k*t.k));
 
 	//console.log("t.x:"+t.x+"\nt.y:"+t.y+"\nt.k:"+t.k);
 

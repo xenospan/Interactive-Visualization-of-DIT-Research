@@ -1012,7 +1012,7 @@ function slideBarFilterInit(){
         console.log("Minima aposfalmatosis: Bale kai alla if gia tis ekstra epiloges pou evales");
       }
       */
-      console.log(parseInt(myradius)+1)
+      //console.log(parseInt(myradius)+1)
       simulation.force('collide', d3.forceCollide().strength(0.3).radius(parseInt(myradius)+1).iterations(4))
       simulation.alpha(1).restart();
 
