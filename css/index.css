@@ -285,6 +285,8 @@ h2{
 
 #myInput{
   width: 650px;
+  position: absolute;
+  z-index: 1;
 }
 
 /******************- Dropdown -*********************/
