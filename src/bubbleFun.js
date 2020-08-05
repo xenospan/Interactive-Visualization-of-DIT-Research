@@ -2,6 +2,7 @@
  * Afto to arxeio filoksenei sinartiseis sxetikes me to bubble vis.
  *
  */
+var recsCount=0;
 var zoomFlag = 1 ;
 var rootOffcetX = 6750;
 var rootOffcetY = 0;
@@ -137,6 +138,61 @@ var researchLabs = ["Laboratory of Algebraic and Geometric Algorithms",
 					"Teaching and Language Technology Group"
 					];
 
+
+(function ($){
+  $.fn.counter = function(numberFrom_=-1, numberTo_=-1, time_=-1) {
+    const $this = $(this);
+
+ 	$(this).css("color", "grey");
+
+    if(numberFrom_==-1)
+    	numberFrom = parseInt($this.attr('data-from'));
+	else
+		numberFrom = numberFrom_;
+
+	if(numberTo_==-1)
+    	numberTo = parseInt($this.attr('data-to'));
+	else
+		numberTo = numberTo_;
+
+    delta = numberTo - numberFrom,
+    deltaPositive = delta > 0 ? 1 : 0;
+
+	if(time_==-1)
+   		time = parseInt($this.attr('data-time'));
+	else
+		time = time_;
+
+    changeTime = 10;
+    
+    var currentNumber = numberFrom,
+    value = delta*changeTime/time;
+    var interval1;
+    const changeNumber = () => {
+      currentNumber += value;
+      //checks if currentNumber reached numberTo
+      (deltaPositive && currentNumber >= numberTo) || (!deltaPositive &&currentNumber<= numberTo) ? currentNumber=numberTo : currentNumber;
+      this.text(parseInt(currentNumber));
+      if(currentNumber >= numberTo){
+      	 	$(this).css("color", "red");
+			return clearInterval(interval1);
+		}
+       else
+			return currentNumber;  
+    }
+
+    interval1 = setInterval(changeNumber,changeTime);
+  }
+}(jQuery));
+
+//$(document).ready(function(){
+
+  //$('.count-up').counter();
+
+  //setTimeout(function () {
+    //$('.count5').counter();
+  //}, 3000);
+//});
 
 /*
  * Function called once data is loaded from CSV.

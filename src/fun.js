@@ -32,37 +32,60 @@ function getCursorXY(e) {
 
 
 //--- Mia proti prospatheia gia isagogh filtrwn ---//
-function applyFilters(){
-  svg.selectAll(".bubble")
-        //.transition()
-        //.duration(1000)
-        //.attr('style', 'opacity: 100');
-        .attr('style', 'visibility: visible'); 
-  for(i=0; i<list1_of_disabled_bubbles.length; i++){
-        svg.selectAll( list1_of_disabled_bubbles[i] )
-           //.transition()
-           //.duration(1000)
-           //.attr('style', 'opacity: 0.07');
-           .attr('style', 'visibility: hidden');
-                
-  }
-  for(i=0; i<list2_of_disabled_bubbles.length; i++){
-        svg.selectAll( list2_of_disabled_bubbles[i] )
-            //.transition()
-            //.duration(1000)
-            //.attr('style', 'opacity: 0.07');
-            .attr('style', 'visibility: hidden');
+function applyFilters(resetFlag = ""){
 
+  var sVal = $("#myInput").val();
+  //console.log(sVal);
+  var to = sVal.length;
+  for(i=0;i<to;i++){
+    sVal = sVal.replace(',,', ',');
   }
+  if(sVal[0]==","){
+   sVal = sVal.replace(',', '');
+  }
+  document.getElementById("myInput").value = sVal;
+
+  svg.selectAll(".bubbleDis")
+        .on('mouseover', showDetail)
+        .on('mouseout', hideDetail)
+        .attr('class', function (d){ return  ('bubble ' +'y'+d.year.toString()) +' '+ d.lab; } )
+        .transition()
+        .attr('style', 'opacity: 100');
+
+  var counter =  recsCount;
+
+  //console.log(list1_of_disabled_bubbles)
+  //console.log(list2_of_disabled_bubbles)
+  if(resetFlag!="reset"){
+    for(i=0; i<list1_of_disabled_bubbles.length; i++){
+          svg.selectAll( list1_of_disabled_bubbles[i] )
+             .on('mouseover', function(){})
+             .on('mouseout', function(){})
+             .attr('class', 'bubbleDis')
+             .transition()
+             //.duration(1000)
+             .attr('style', 'opacity: 0.07');
+             //.attr('style', 'visibility: hidden');        
+    }
+    for(i=0; i<list2_of_disabled_bubbles.length; i++){
+          svg.selectAll( list2_of_disabled_bubbles[i] )
+             .on('mouseover', function(){})
+             .on('mouseout', function(){})
+             .attr('class', 'bubbleDis')
+             .transition()
+             //.duration(1000)
+             .attr('style', 'opacity: 0.07');
+             //.attr('style', 'visibility: hidden');
+    }
+  }
+  counter = counter - ( svg.selectAll('.bubbleDis').size() );
+
+  $('.count-up').counter(0,counter,30);
   //#card reset
-
   $("#cardtext").empty();
-  $("#cardtext").innerText = "lalal";
   $("#cardtitle").empty();
   $("#cardsubtitle").empty();
-
 }
-
 
 //--- Search bar ---//
 
@@ -71,30 +94,61 @@ function applyFilters(){
  */
 var names = [];
 var searchValue = " ";
+var searchList = [];
 function AuthorFunctionFilter(author_name){
-  //input = document.getElementById("myInput2");
+  var sVal = $("#myInput").val();
+  var to = sVal.length;
+  for(i=0;i<to;i++){
+    sVal = sVal.replace(',,', ',');
+  }
+  if(sVal[0]==","){
+   sVal = sVal.replace(',', '');
+  }
+  document.getElementById("myInput").value = sVal;
+
+  searchValue = $("#myInput").val();
+  searchList = searchValue.split(",");
+  var goFlag=0;
+  for(i=0;i<searchList.length;i++){
+    sl_i = searchList[i].toLowerCase();
+    if(sl_i=="gunopulos"||sl_i=="maroulis"||sl_i=="eleftheriadis"||sl_i=="manolakos"||sl_i=="kouroupetroglou"||sl_i=="chamodrakas"||sl_i=="emiris"||sl_i=="stavrakakis"||sl_i=="merakos"||sl_i=="koubarakis"||sl_i=="grigoriadou"||sl_i=="roussou"||sl_i=="roussopoulos"||sl_i=="mathiopoulos"||sl_i=="hadjiefthymiades"||sl_i=="theoharis"||sl_i=="ioannidis"){
+      searchList[i]=author_name;
+      goFlag = 1;
+    }
+  }
+
+
   input = document.getElementById("myInput");
   
-  input.value = author_name;
-  //console.log("Athor name is: ",author_name);
+  if(goFlag==1){
+    var myinput="";
+    for(i=0;i<searchList.length;i++){
+      myinput = myinput + "," +   searchList[i] + ",";
+    }
+    input.value = myinput;
+  }
+  else{
+    input.value = input.value + "," + author_name + ",";
+  }
 
   list1_of_disabled_bubbles = [];
-  searchValue = author_name.toLowerCase(); //Metatropi ths timis anazitisis se mikra gramata.
+  searchValue = $("#myInput").val().toLowerCase(); //Metatropi ths timis anazitisis se mikra gramata.
+  searchList = searchValue.split(",");
 
   $("#myTableBody tr").filter(function() { //filtrarisma timwn pinaka simfona me mia sinartisi
-    $(this).toggle( ($(this).text().toLowerCase().indexOf(searchValue) > -1) && yearTableFilter($(this).text(),names) )  //gia kathe grami tou pinaka <tr> kanoume:
+    //$(this).toggle( ($(this).text().toLowerCase().indexOf(searchList[0]) > -1) && yearTableFilter($(this).text(),names) )  //gia kathe grami tou pinaka <tr> kanoume:
                                            // toggle true(An h timi teriazei me to searchValue, indexOf epistrepsei thetiko arithmo) 
                                           //h' toggle false(An h timi den teriazei me to searchValue, indexOf epistrepsei arnitiko arithmo).
     var temp_id = parseInt($(this).text());
-    if( ($(this).text().toLowerCase().indexOf(searchValue) > -1 ) == false){
-      if(svg!=null){
-        list1_of_disabled_bubbles.push( "#id"+temp_id ); //apothikefse to id tou pediou pou egine aorato.
-      }
-    }   
+    for(i=0;i<searchList.length;i++){
+      if( ($(this).text().toLowerCase().indexOf(searchList[i]) > -1 ) == false){
+        if(svg!=null){
+          list1_of_disabled_bubbles.push( "#id"+temp_id ); //apothikefse to id tou pediou pou egine aorato.
+        }
+      } 
+    }  
   });
-
   applyFilters();
-
 }
 
 
@@ -105,32 +159,60 @@ function AuthorFunctionFilter(author_name){
 var names = [];
 var searchValue = " ";
 function typeFunctionFilter(type_name){
-  //input = document.getElementById("myInput2");
+  var sVal = $("#myInput").val();
+  for(i=0;i<sVal.length;i++){
+    sVal = sVal.replace(',,', ',');
+  }
+  if(sVal[0]==","){
+   sVal = sVal.replace(',', '');
+  }
+  document.getElementById("myInput").value = sVal;
+
+  searchValue = $("#myInput").val();
+  searchList = searchValue.split(",");
+  var goFlag=0;
+  for(i=0;i<searchList.length;i++){
+    sl_i = searchList[i].toLowerCase();
+    if(sl_i=="ευρεσιτεχνία"||sl_i=="αναφορά"||sl_i=="βιβλίο"||sl_i=="διάσκεψη"||sl_i=="διάφορα"||sl_i=="επιστημονικό άρθρο"){
+      searchList[i]=type_name;
+      goFlag = 1;
+    }
+  }
+
   input = document.getElementById("myInput");
   
-  input.value = type_name;
+  if(goFlag==1){
+    var myinput="";
+    for(i=0;i<searchList.length;i++){
+      myinput = myinput + "," + searchList[i]+",";
+    }
+    input.value = myinput;
+  }
+  else{
+    input.value = input.value + "," +  type_name+",";
+  }
 
   list1_of_disabled_bubbles = [];
-  searchValue = type_name.toLowerCase(); //Metatropi ths timis anazitisis se mikra gramata.
+  searchValue = $("#myInput").val().toLowerCase(); //Metatropi ths timis anazitisis se mikra gramata.
+  searchList = searchValue.split(",");
 
   $("#myTableBody tr").filter(function() { //filtrarisma timwn pinaka simfona me mia sinartisi
-    $(this).toggle( ($(this).text().toLowerCase().indexOf(searchValue) > -1) && yearTableFilter($(this).text(),names) )  //gia kathe grami tou pinaka <tr> kanoume:
+    //$(this).toggle( ($(this).text().toLowerCase().indexOf(searchList[0]) > -1) && yearTableFilter($(this).text(),names) )  //gia kathe grami tou pinaka <tr> kanoume:
                                            // toggle true(An h timi teriazei me to searchValue, indexOf epistrepsei thetiko arithmo) 
                                           //h' toggle false(An h timi den teriazei me to searchValue, indexOf epistrepsei arnitiko arithmo).
     var temp_id = parseInt($(this).text());
-    if( ($(this).text().toLowerCase().indexOf(searchValue) > -1 ) == false){
-      if(svg!=null){
-        list1_of_disabled_bubbles.push( "#id"+temp_id ); //apothikefse to id tou pediou pou egine aorato.
+    var tempFlag = 0;
+    for(i=0;i<searchList.length;i++){
+      if( ($(this).text().toLowerCase().indexOf(searchList[i]) > -1 ) == false){
+        if(svg!=null){
+          list1_of_disabled_bubbles.push( "#id"+temp_id ); //apothikefse to id tou pediou pou egine aorato.
+        }
       }
-    }   
+    }
+    
   });
-
   applyFilters();
-
 }
-
-
-
 
 
 /* When the user clicks on the button,
@@ -262,16 +344,24 @@ function searchFiltersInit(){
       list1_of_disabled_bubbles = [];
       searchValue = $(this).val().toLowerCase(); //Metatropi ths timis anazitisis se mikra gramata.
 
+      var searchList = searchValue.split(",")
+      //for(i=0;i<searchList.length;i++){
+       //console.log("Leksis kidia: ",searchList[i])
+      //}
+
       $("#myTableBody tr").filter(function() { //filtrarisma timwn pinaka simfona me mia sinartisi
-        $(this).toggle( ($(this).text().toLowerCase().indexOf(searchValue) > -1) && yearTableFilter($(this).text(),names) )  //gia kathe grami tou pinaka <tr> kanoume:
+        //$(this).toggle( ($(this).text().toLowerCase().indexOf(searchList[0]) > -1) && yearTableFilter($(this).text(),names))  //gia kathe grami tou pinaka <tr> kanoume:
                                                // toggle true(An h timi teriazei me to searchValue, indexOf epistrepsei thetiko arithmo) 
                                               //h' toggle false(An h timi den teriazei me to searchValue, indexOf epistrepsei arnitiko arithmo).
         var temp_id = parseInt($(this).text());
-        if( ($(this).text().toLowerCase().indexOf(searchValue) > -1 ) == false){
-          if(svg!=null){
-            list1_of_disabled_bubbles.push( "#id"+temp_id ); //apothikefse to id tou pediou pou egine aorato.
-          }
-        }   
+        for(i=0;i<searchList.length;i++){
+          if( ($(this).text().toLowerCase().indexOf(searchList[i]) > -1 ) == false){
+            //if( ($(this).text().toLowerCase().indexOf(searchValue) > -1 ) == false){
+            if(svg!=null){
+              list1_of_disabled_bubbles.push( "#id"+temp_id ); //apothikefse to id tou pediou pou egine aorato.
+            }
+          }  
+        }
       });
 
       applyFilters();
@@ -319,28 +409,40 @@ function visInit(){
 
 }
 
+function resetFilters(){
+
+  document.getElementById('myInput').value = "";  // gia na katharizei to Search se periptosi refrech
+
+  applyFilters("reset");
+  AuthorFunctionFilter(",")
+}
+
+
+
+
 /*
  * Sets up the layout buttons to allow for toggling between view modes.
  */
 function setupButtons() {
   d3.select('#toolbar')
     .selectAll('.button')
-    .on('click', function () {
-      // Remove active class from all buttons
-      d3.selectAll('.button').classed('active', false);
-      // Find the button just clicked
-      var button = d3.select(this);
+    .on('click', function(){
+                    // Remove active class from all buttons
+                    d3.selectAll('.button').classed('active', false);
+                    // Find the button just clicked
+                    var button = d3.select(this);
 
-      // Set active "this" button
-      button.classed('active', true);
+                    // Set active "this" button
+                    button.classed('active', true);
 
-      // Get the id of the button
-      var buttonId = button.attr('id');
-      // Toggle the bubble chart based on
-      // the currently clicked button.
-      myBubbleChart.toggleDisplay(buttonId);
-    });
+                    // Get the id of the button
+                    var buttonId = button.attr('id');
+                    // Toggle the bubble chart based on
+                    // the currently clicked button.
+                    myBubbleChart.toggleDisplay(buttonId);
+                  });
 }
+
 
 
 /*
@@ -353,7 +455,7 @@ function dataToCard(d) {  //#data
     linkStr = "";
   }
   else{
-    linkStr = '<br><br><span class="name">Διαθέσιμο στην Διεύθυνση: </span><span class="value">' +
+    linkStr = '<br><br><span class="name">Διαθέσιμο ως: </span><span class="value">' +
               '<a href="'+ d.link +'" target="_blank"> PDF </a>'+
               '</span>';
   }
@@ -375,7 +477,7 @@ function dataToCard(d) {  //#data
               //addCommas(d.value) +
               d.authors +
               '</span><br><br>' +
-              '<span class="name">Είδος Δημοσιεύσεις: </span><span class="value">' +
+              '<span class="name">Είδος Δημοσίευσεις: </span><span class="value">' +
               d.type +
               '</span><br><br>' +
               '<span class="name">Ερευνητικό Εργαστήριο: </span><span class="value">' +

@@ -288,6 +288,13 @@ h2{
   position: absolute;
   z-index: 1;
 }
+.count-up{
+  position: absolute;
+  left: 595px;
+  top: 55px;
+  z-index: 2;
+  color: grey;
+}
 
 /******************- Dropdown -*********************/
 
@@ -344,10 +351,23 @@ h2{
 
 #myInput2:focus {outline: 3px solid #ddd;}
 
+
+/*
+
+#dropdown1{
+
+  position: absolute;
+  left: 320px;
+  z-index: 1;
+}
+
+
 .dropdown {
   position: relative;
   display: inline-block;
 }
+
+
 
 .dropdown-content {
   display: none;
@@ -378,7 +398,7 @@ h2{
   overflow: auto;
   border: 1px solid #ddd;
   z-index: 1;
-  /*overflow-y: scroll;*/
+  overflow-y: scroll;
 }
 
 .dropdown-content2 a {
@@ -392,6 +412,13 @@ h2{
 
 
 .dropdown a:hover {background-color: #CCE5FF;}
+*/
+
+/*
+#dropdown1 #dropdownMenuButton{
+  overflow-y: scroll;
+}
+*/
 
 .show {
   display: block;

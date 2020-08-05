@@ -60,7 +60,11 @@ function bubbleChart() {
     var temp_nodes = filterNodes(rawData);
 
     nodes = temp_nodes.filter( value => value != 0 );
-
+    recsCount = nodes.length;
+    $(document).ready(function(){
+      $('.count-up').counter(1,recsCount,60);
+    });
+    
     //console.log(nodes);
   
     // Create a SVG element inside the provided selector
