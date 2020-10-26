@@ -1,7 +1,5 @@
 //new js file with funs
 
-
-
 var nodes = [];
 var cursorX;
 var cursorY;
@@ -173,7 +171,7 @@ function typeFunctionFilter(type_name){
   var goFlag=0;
   for(i=0;i<searchList.length;i++){
     sl_i = searchList[i].toLowerCase();
-    if(sl_i=="ευρεσιτεχνία"||sl_i=="αναφορά"||sl_i=="βιβλίο"||sl_i=="διάσκεψη"||sl_i=="διάφορα"||sl_i=="επιστημονικό άρθρο"){
+    if(sl_i=="ευρεσιτεχνία"||sl_i=="αναφορά"||sl_i=="βιβλίο"||sl_i=="Συνέδριο"||sl_i=="διάφορα"||sl_i=="επιστημονικό άρθρο"){
       searchList[i]=type_name;
       goFlag = 1;
     }
@@ -502,7 +500,7 @@ function dataToCard(d) {  //#data
 // @v4 scales now have a flattened naming scheme
 var fillColor = d3.scaleOrdinal()
 //.domain(["article", "inproceedings", "techreport", "book", "incollection", "phdthesis", "misc"])
-.domain(["Επιστημονικό άρθρο","Ευρεσιτεχνία","Αναφορά","Βιβλίο","Διάσκεψη","Διάφορα"])
+.domain(["Επιστημονικό άρθρο","Ευρεσιτεχνία","Αναφορά","Βιβλίο","Συνέδριο","Διάφορα"])
 .range(['#FF0000', '#FF8000', '#FFFF00', '#80FF00', '#00FFFF', '#0000FF', '#FF00FF']);
 
 /*
@@ -1301,7 +1299,7 @@ function nodeTypePos_old(d) {
       y = typeCenters["techreport"].y;
     else if(d.type == "Βιβλίο")
       y = typeCenters["book"].y;
-    else if(d.type == "Διάσκεψη")
+    else if(d.type == "Συνέδριο")
       y = typeCenters["incollection"].y;
     else if(d.type == "Διάφορα")
       y = typeCenters["misc"].y;
